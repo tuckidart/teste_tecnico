@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd229a60ef5fa8428c50d9569ef5811, type: 3}
+  m_Name: Medicine
+  m_EditorClassIdentifier: 
+  itemName: Medicine
+  itemSprite: {fileID: 21300000, guid: fa4506de06610f344bf3acc121390ebf, type: 3}
+  coin: {fileID: 11400000, guid: ddfe5644fb1e96b4d9c5270effa5c3c1, type: 2}
+  value: 1
