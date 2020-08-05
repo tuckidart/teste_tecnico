@@ -14,10 +14,18 @@ public class Npc : MonoBehaviour
     {
         if (canOpenStore && player.interacting)
         {
-            Coin_Spawner.instance.StopSpawn();
-            UI_Store.instance.OpenStore(itemsToUIStore);
-            canOpenStore = false;
+            OpenStore();
+            return;
         }
+    }
+
+    void OpenStore()
+    {
+        Coin_Spawner.instance.StopSpawn();
+        //min inclusivo - max exclusivo (sorteando de 3 a 5 itens)
+        int random = Random.Range(3, 6);
+        itemsToUIStore = GetRandomItemsFromList(items_Available, random);
+        UI_Store.instance.OpenStore(itemsToUIStore);
     }
 
     public void RemoveItem(Item itemToRemove)
@@ -42,10 +50,6 @@ public class Npc : MonoBehaviour
         {
             player = other.gameObject.GetComponent<Player>();
             canOpenStore = true;
-
-            //min inclusivo - max exclusivo (sorteando de 3 a 5 itens)
-            int random = Random.Range(3, 6);
-            itemsToUIStore = GetRandomItemsFromList(items_Available, random);
         }
     }
 

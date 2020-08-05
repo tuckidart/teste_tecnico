@@ -27,9 +27,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         float movement = controls.Player.Movement.ReadValue<float>();
+
         Vector3 currentPos = transform.position;
         currentPos.x += movement * speed * Time.deltaTime;
-
         transform.position = currentPos;
     }
 
@@ -45,9 +45,9 @@ public class Player : MonoBehaviour
         itens.Add(newItem);
         UI_Items.instance.AddItemToUI(newItem);
     }
-    public void AddCurrency(Coin.CurrencyTypes currencyType, int in_amount)
+    public void AddCurrency(Coin.CurrencyTypes currencyType, int amount)
     {
-        coins[currencyType] += in_amount;
+        coins[currencyType] += amount;
         UI_Coins.instance.Change_UI_Currency(currencyType);
     }
     public float GetCurrency(Coin.CurrencyTypes currencyType)

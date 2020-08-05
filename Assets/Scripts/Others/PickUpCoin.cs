@@ -20,7 +20,7 @@ public class PickUpCoin : MonoBehaviour
         if (canGrab && player.interacting)
         {
             player.AddCurrency(coin.currencyType, 1);
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
     }
 

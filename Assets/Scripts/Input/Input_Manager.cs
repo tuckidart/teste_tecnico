@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Input_Manager.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Input/Input_Manager.inputactions'
 
 using System;
 using System.Collections;
@@ -40,6 +40,17 @@ public class @Input_Manager : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""8c659914-2552-4187-ae9e-75d48af3cb9b"",
                     ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c651777-4736-4d6a-81a1-28a1d5ce276e"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -127,6 +138,17 @@ public class @Input_Manager : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""9c577ff8-6ab8-4be8-b13e-93a01177687a"",
                     ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0e601a5-811f-4f36-a8ee-390badd9d774"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
