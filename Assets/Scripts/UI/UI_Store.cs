@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class UI_Store : MonoBehaviour
 {
@@ -9,12 +10,9 @@ public class UI_Store : MonoBehaviour
     public static UI_Store instance;
     public GameObject StoreItemPrefab;
     public GameObject itemsPanel;
-    public GameObject selectionPrefab;
     List<GameObject> items = new List<GameObject>();
     Player player;
     Npc npc;
-    GameObject selection;
-    int iterator = 0;
 
     void Awake()
     {
@@ -35,17 +33,16 @@ public class UI_Store : MonoBehaviour
             aux.GetComponent<Item_Display>().SetItem(newItems[i]);
             items.Add(aux);
         }
-        selection = Instantiate(selectionPrefab, Vector3.zero, Quaternion.identity);
-        selection.transform.SetParent(items[iterator].transform, false);
 
         gameObject.SetActive(true);
         player.controls.Disable();
+
+        EventSystem.current.SetSelectedGameObject(items[0]);
     }
 
     public void CloseStore()
     {
         gameObject.SetActive(false);
-        Destroy(selection);
         foreach (Transform child in itemsPanel.transform)
         {
             items.Remove(child.gameObject);
@@ -53,36 +50,21 @@ public class UI_Store : MonoBehaviour
         }
         Coin_Spawner.instance.StartSpawn();
         player.controls.Enable();
-        iterator = 0;
     }
 
-    void ChangeSelection(InputAction.CallbackContext context)
-    {
-        iterator += (int)context.ReadValue<float>();
-        if (iterator > items.Count - 1)
-            iterator = 0;
-        else if (iterator < 0)
-            iterator = items.Count - 1;
-
-        selection.transform.SetParent(items[iterator].transform, false);
-    }
     void TryBuy(InputAction.CallbackContext context)
     {
-        GameObject go = items[iterator];
+        GameObject go = EventSystem.current.currentSelectedGameObject;
         Item i = go.GetComponent<Item_Display>().GetItem();
-        if(player.GetCurrency(i.coin.currencyType) >= i.value)
+        if (player.GetCurrency(i.coin.currencyType) >= i.value)
         {
             player.AddCurrency(i.coin.currencyType, -i.value);
             player.AddItemToBag(i);
             npc.RemoveItem(i);
-            selection.transform.SetParent(null, false);
             items.Remove(go);
             Destroy(go);
             if (items.Count > 0)
-            {
-                iterator = 0;
-                selection.transform.SetParent(items[iterator].transform, false);
-            }
+                EventSystem.current.SetSelectedGameObject(items[0]);
             else
                 CloseStore();
         }
@@ -94,14 +76,12 @@ public class UI_Store : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Store.ChangeSelection.performed += ChangeSelection;
         controls.Store.Confirm.started += TryBuy;
         controls.Store.Cancel.started += Cancel;
         controls.Enable();
     }
     private void OnDisable()
     {
-        controls.Store.ChangeSelection.performed -= ChangeSelection;
         controls.Store.Confirm.started -= TryBuy;
         controls.Store.Cancel.started -= Cancel;
         controls.Disable();
