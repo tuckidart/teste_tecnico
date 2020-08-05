@@ -1,5 +1,4 @@
 # teste_tecnico TIAGO SILVA DUARTE
-# Arrow keys to move and browse the store
-# Space key to collect coins and open the store
-# Enter key to buy items
+# Arrow keys to move/browse the store
+# Space key/Enter to interact with everything
 # ESC to close store
